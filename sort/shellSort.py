@@ -16,11 +16,10 @@ class Solution:
         for i in xrange(1, end):
             if nums[i] < nums[i-1]:
                 n = nums[i]
-                for j in xrange(i-1, -1, -1):
-                    if nums[j] > n:
-                        nums[j+1] = nums[j]
-                    else:
-                        break
+                j = i - 1
+                while j >= 0 and nums[j] > n:
+                    nums[j+1] = nums[j]
+                    j -= 1
                 nums[j+1] = n
 
     # @param {integer[]} nums
