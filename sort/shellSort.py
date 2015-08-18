@@ -13,9 +13,15 @@ class Solution:
     def insertSort(self, nums):
         end = len(nums)
 
-        for i in xrange(end, 0, -1):
-            for 
-
+        for i in xrange(1, end):
+            if nums[i] < nums[i-1]:
+                n = nums[i]
+                for j in xrange(i-1, -1, -1):
+                    if nums[j] > n:
+                        nums[j+1] = nums[j]
+                    else:
+                        break
+                nums[j+1] = n
 
     # @param {integer[]} nums
     def shellSort(self, nums):
