@@ -13,18 +13,35 @@ class Solution:
     def mergeSort(self, nums):
         length = len(nums)
 
-        if length == 1:
+        if length == 2:
             if nums[1] < nums[0]:
                 (nums[0], nums[1]) = (nums[1], nums[0])
-        elif length == 0:
+            return nums
+        if length < 2:
             return nums
 
-        
+        m = int(length / 2)
 
-        print 'mergeSort'
+        left = self.mergeSort(nums[:m])
+        right = self.mergeSort(nums[m:])
 
-    def merge(self, lst1, lst2):
-        return []
+        return self.merge(left, right)
+
+    def merge(self, left, right):
+        nums = []
+        print "left: %s" % left
+        print "right: %s" % right
+
+        while left and right:
+            nums.append(left.pop() if left[-1] >= right[-1] else right.pop())
+        while left:
+            nums.append(left.pop())
+        while right:
+            nums.append(right.pop())
+        nums.reverse()
+
+        print 'nums: %s' % nums
+        return nums
 
     def createArray(self):
         array = []
@@ -37,21 +54,21 @@ if __name__ == '__main__':
     s = Solution()
 
     a = s.createArray()
-    #a = [29, 69, 53, 31, 75, 55]
+    a = [0, 68, 100, 34, 20, 99, 48, 33]
     print a
     
     aa = list(a)
     start = time.time()
-    s.mergeSort(aa)
+    aa = s.mergeSort(aa)
     end = time.time()
-    #print aa, 
+    print aa, 
     print '%0.6f' % (end - start)
 
     ac = list(a)
     start = time.time()
     ac.sort()
     end = time.time()
-    #print ac,
+    print ac,
     print '%0.6f' % (end - start)
 
     print aa == ac
